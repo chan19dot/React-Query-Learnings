@@ -1,12 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { HOME, PLANETS } from "./CONSTANTS";
-import { TableComponent } from "../components/TableComponent";
-import { Planets } from "../components/Planets";
-import {
-  QueryClient,
-  QueryClientProvider,
-  ReactQueryDevtools,
-} from "react-query";
+import { TableComponent } from "../Pages/TableComponent";
+import { Planets } from "../Pages/Planets";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
   defaultOptions: {
