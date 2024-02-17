@@ -4,7 +4,6 @@ import { BASE_URL_SWAPI } from "./constants";
 export const getPeople = async (page) => {
   try {
     const data = await axios.get(prepareUrl(`people/?page=${page}`));
-    console.log(data);
     return data;
   } catch (err) {
     console.error(err);
