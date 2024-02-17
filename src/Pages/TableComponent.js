@@ -1,23 +1,31 @@
 import { useQuery } from "react-query";
 import { getPeople } from "../api/get";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Planets } from "./Planets";
 import { PLANETS } from "../Navigation/CONSTANTS";
 
 export const TableComponent = () => {
   const [page, setPage] = useState(1);
+  const [disableNextPage, setDisableNextPage] = useState(false);
   const navigate = useNavigate();
+
   const query = useQuery({
     queryKey: ["fetchData", page],
-    queryFn: () => {
-      return getPeople(page);
-    },
+    queryFn: () => getPeople(page),
   });
+
+  useEffect(() => {
+    if (!query?.data?.data.next) {
+      setDisableNextPage(true);
+    } else {
+      setDisableNextPage(false);
+    }
+  }, [query?.data?.data.next]);
 
   if (query.isLoading) {
     return <div>Loading...</div>;
   }
+
   const loadNextPage = () => {
     setPage((old) => old + 1);
   };
@@ -60,6 +68,7 @@ export const TableComponent = () => {
         Previous page
       </button>
       <button
+        disabled={disableNextPage}
         onClick={() => {
           loadNextPage();
         }}

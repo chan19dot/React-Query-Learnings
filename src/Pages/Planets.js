@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from "react-query";
 import { getPlanets } from "../api/get";
-import { useState } from "react";
 
 export const Planets = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
