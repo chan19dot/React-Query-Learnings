@@ -13,17 +13,16 @@ export const getPeople = async (page) => {
 
 export const getPlanets = async ({ pageParam }) => {
   let planets = [];
-  console.log(pageParam);
   try {
     let data;
     if (!pageParam) {
       data = await axios.get(prepareUrl(`planets/?page=1`));
     } else {
       data = await axios.get(pageParam);
-      console.log("inside");
     }
     return data.data;
   } catch (err) {
+    //TODO: add an error toast
     console.error(err);
     return planets;
   }
